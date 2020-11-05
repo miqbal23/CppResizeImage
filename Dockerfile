@@ -63,4 +63,4 @@ RUN cmake . && make
 
 EXPOSE 8080
 
-ENTRYPOINT [ "./helloserver" ]
+ENTRYPOINT [ "/src/helloserver" ]
