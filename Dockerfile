@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:18.04 AS build
 
 # install essentials
 RUN apt-get -y update && \
@@ -51,10 +51,16 @@ RUN cd ~/temp && \
 COPY . /usr/src/myapp
 WORKDIR /usr/src/myapp
 
-# This command compiles your app using GCC, adjust for your source code
-# RUN g++ -o myapp main.cpp
+# Build the app
+RUN mkdir build && cd build && \
+    cmake ../ && make -j4 && make
+
+FROM ubuntu:18.04
+
+COPY --from=build /usr/src/myapp/build/hello_libasyik /app/
 
 # This command runs your application, comment out this line to compile only
-# CMD ["./myapp"]
+EXPOSE 4004
+ENTRYPOINT [ "/app/hello_libasyik" ]
 
 # LABEL Name=cppresizeimage Version=0.0.1
