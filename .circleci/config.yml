@@ -6,7 +6,6 @@ jobs:
     environment:
       IMAGE_NAME: nobodykid/hello_libasyik
     machine: true
-    working_directory: /tmp
     steps:
       - checkout
       - run:
@@ -16,7 +15,7 @@ jobs:
           name: Archive Docker image
           command: docker save -o /tmp/hello_libasyik.tar $IMAGE_NAME
       - persist_to_workspace:
-          root: .
+          root: /tmp/
           paths: ./hello_libasyik.tar
   save-artifacts:
     environment:
