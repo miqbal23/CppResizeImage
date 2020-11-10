@@ -13,7 +13,7 @@ jobs:
           command: docker build . -t $IMAGE_NAME:0.1.0
       - run:
           name: Archive Docker image
-          command: docker save -o $IMAGE_NAME.tar $IMAGE_NAME
+          command: docker save -o hello_libasyik.tar $IMAGE_NAME
       - persist_to_workspace:
           root: .
           paths:
@@ -26,4 +26,4 @@ jobs:
       - attach_workspace:
           at: /tmp/workspace
       - store_artifacts:
-          path: /tmp/workspace/$IMAGE_NAME.tar
+          path: /tmp/workspace/hello_libasyik.tar
