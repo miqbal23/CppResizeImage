@@ -5,19 +5,19 @@ set(CMAKE_CXX_STANDARD 17)
 # include(CTest)
 # enable_testing()
 
-add_executable(hello_libasyik src/hello_libasyik.cpp)
+add_executable(${PROJECT_NAME} src/hello_libasyik.cpp)
 
 # set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 # set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 # include(CPack)
 
-find_package(libasyik)
+find_package(libasyik REQUIRED)
 if(libasyik_FOUND)
     target_include_directories(${PROJECT_NAME} PUBLIC ${libasyik_INCLUDE_DIR})
     target_link_libraries(${PROJECT_NAME} libasyik)
 endif()
 
-find_package(Boost COMPONENTS context fiber REQUIRED)
+find_package(Boost COMPONENTS context fiber date_time REQUIRED)
 if(Boost_FOUND)
     target_include_directories(${PROJECT_NAME} PUBLIC ${Boost_INCLUDE_DIR})
     target_link_libraries(${PROJECT_NAME} Boost::fiber Boost::context)

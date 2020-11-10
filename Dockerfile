@@ -53,14 +53,14 @@ WORKDIR /usr/src/myapp
 
 # Build the app
 RUN mkdir build && cd build && \
-    cmake ../ && make -j4 && make
+    cmake ../ && make -j4 && make 
 
 FROM ubuntu:18.04
 
-COPY --from=build /usr/src/myapp/build/hello_libasyik /app/
+COPY --from=build /usr/src/myapp/build/test_asyik /app/
 
 # This command runs your application, comment out this line to compile only
 EXPOSE 4004
-ENTRYPOINT [ "/app/hello_libasyik" ]
+ENTRYPOINT [ "/app/test_asyik" ]
 
 # LABEL Name=cppresizeimage Version=0.0.1
