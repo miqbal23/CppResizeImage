@@ -1,11 +1,11 @@
-executors:
-  docker-publisher:
+version: 2
+orbs:
+  welcome: circleci/welcome-orb@0.4.1
+jobs:
+  build:
     environment:
       IMAGE_NAME: nobodykid/hello_libasyik
     machine: true
-jobs:
-  build:
-    executor: docker-publisher
     steps:
       - checkout
       - run:
@@ -19,23 +19,11 @@ jobs:
           paths:
             - ./image.tar
   save-artifacts:
-    executor: docker-publisher
+    environment:
+      IMAGE_NAME: nobodykid/hello_libasyik
+    machine: true
     steps:
       - attach_workspace:
           at: /tmp/workspace
       - store_artifacts:
           path: /tmp/workspace/$IMAGE_NAME.tar
-workflows:
-  version: 2.1
-  build-master:
-    jobs:
-      - build:
-          filters:
-            branches:
-              only: master
-      - save-artifacts:
-          requires:
-            - build
-          filters:
-            branches:
-              only: master
