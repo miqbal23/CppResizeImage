@@ -4,7 +4,6 @@ executors:
     environment:
       IMAGE_NAME: nobodykid/hello_libasyik
     machine: true
-
 jobs:
   build:
     executor: docker-publisher
@@ -27,7 +26,6 @@ jobs:
           at: /tmp/workspace
       - store_artifacts:
           path: /tmp/workspace/$IMAGE_NAME.tar
-      
 workflows:
   version: 2
   build-master:
