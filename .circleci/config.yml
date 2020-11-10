@@ -16,7 +16,8 @@ jobs:
           name: Archive Docker image
           command: docker save -o /tmp/hello_libasyik.tar $IMAGE_NAME
       - persist_to_workspace:
-          paths: /tmp/hello_libasyik.tar
+          root: .
+          paths: ./hello_libasyik.tar
   save-artifacts:
     environment:
       IMAGE_NAME: nobodykid/hello_libasyik
