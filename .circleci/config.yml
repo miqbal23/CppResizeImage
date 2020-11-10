@@ -1,21 +1,11 @@
 version: 2
+orbs:
+  codecov: codecov/codecov@1.0.2
 jobs:
-  build:
-    environment:
-      IMAGE_NAME: nobodykid/test_asyik
-    docker:
-      - image: circleci/buildpack-deps:stretch
+  build:  
+    machine: true
     steps:
       - checkout
-      - setup_remote_docker
-      - run:
-          name: Build test_libasyik
-          command: docker build -t $IMAGE_NAME:latest .
-workflows:
-  version: 2
-  build-master:
-    jobs:
-      - build:
-          filters:
-            branches:
-              only: master
+     
+      # build the application image
+      - run: docker build . -t test_asyik 
